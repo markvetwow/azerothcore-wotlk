@@ -139,6 +139,32 @@ public:
 };
 
 /*######
+## go_shaffar_stasis
+######*/
+
+const uint32 NpcYorSummon[] =
+{
+    22930
+};
+
+class go_shaffar_stasis : public GameObjectScript
+{
+public:
+    go_shaffar_stasis() : GameObjectScript("go_shaffar_stasis") { }
+
+    bool OnGossipHello(Player* player, GameObject* go) override
+    {
+        int Random = rand() % (sizeof(NpcYorSummon) / sizeof(uint32));
+
+        player->SummonCreature(NpcYorSummon[Random], -209.350800f, 9.096672f, 16.788593, go->GetAngle(player),
+            TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 30000);
+
+        return false;
+    }
+};
+
+
+/*######
 ## go_ethereum_prison
 ######*/
 
@@ -1650,6 +1676,7 @@ void AddSC_go_scripts()
     new go_tadpole_cage();
     new go_flames();
     new go_heat();
+    new go_shaffar_stasis();
 
     // Theirs
     new go_brewfest_music();
